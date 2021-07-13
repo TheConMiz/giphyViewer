@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "giphyViewer",
+    "slug": "giphyViewer",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "giphyViewer"
+}
