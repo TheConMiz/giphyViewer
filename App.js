@@ -8,6 +8,7 @@ import { NativeBaseProvider, Text, Box, Button} from 'native-base';
 
 import { ImageView } from './ImageView';
 import { TopBar } from './TopBar';
+import { FavouritesView } from './FavouritesView';
 
 export const App = () => {
 
@@ -44,10 +45,10 @@ export const App = () => {
     }
 
 
-    function addToFavourites(gif) {
+    function addToFavourites(id) {
         let newFavourites = favourites.slice();
 
-        if (newFavourites.includes(gif.id)) {
+        if (newFavourites.includes(id)) {
             console.log("Already favourited. Gonna Delete now");
 
             // TODO: Delete favourites.
@@ -61,18 +62,13 @@ export const App = () => {
         }
         
         else {
-            newFavourites.push(gif);
+            newFavourites.push(id);
 
             setFavourites(newFavourites);
         }
-
     }
 
     function deleteFromFavourites(id) {
-        
-    }
-
-    async function supplementGifs() {
         
     }
 
@@ -105,28 +101,36 @@ export const App = () => {
                     }
                 </Text>
 
-                <FlatList
-                    data={onMainPage ? gifs : gifs.filter((item) => {
-                        favourites.includes(item.id);
-                    })}
-                    extraData={onMainPage}
-
-                    renderItem={({ item }) => (
-                        <ImageView
-                            resizeMode='contain'
-                            source={{ uri: item.images.original.url }}
-                            id={item.id}
-                            addToFavourites={addToFavourites}
-                            favourites={favourites}
-                            onMainPage={onMainPage}
+                {
+                    onMainPage ?
+                        <FlatList
+                            data={gifs}
+                            renderItem={({ item }) => (
+                                <ImageView
+                                    resizeMode='contain'
+                                    source={{ uri: item.images.original.url }}
+                                    id={item.id}
+                                    addToFavourites={addToFavourites}
+                                    favourites={favourites}
+                                    onMainPage={onMainPage}
+                                />
+                            )}
+                        /> :
+                        
+                        <FlatList
+                            data={gifs}
+                            renderItem={({ item }) => (
+                                <FavouritesView
+                                    resizeMode='contain'
+                                    source={{ uri: item.images.original.url }}
+                                    id={item.id}
+                                    addToFavourites={addToFavourites}
+                                    favourites={favourites}
+                                    onMainPage={onMainPage}
+                                />
+                            )}
                         />
-                    )}
-                    // onEndReached={() => {
-                    //     setOffset(offset + limit);
-                    //     supplementGifs();
-                    // }}
-                    // onEndReachedThreshold={0.01}
-                />
+                }
 
             </View>
         </NativeBaseProvider>

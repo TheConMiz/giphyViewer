@@ -2,18 +2,20 @@ import React, {useEffect} from 'react';
 
 import { View, Image, StyleSheet, Dimensions } from 'react-native';
 
-import { IconButton, Icon } from "native-base";
+import { IconButton, Icon, List } from "native-base";
 
 import { favouriteIcon, shareIcon, deleteIcon } from './Constants';
 
 
 export const ImageView = (props) => {
 
-    useEffect(() => {
 
-    }, [props.favourites])
+    // if the id is in the favourites List, show it
+
+
 
     return (
+        
         <View
             style={styles.container}
         >
@@ -49,8 +51,7 @@ export const ImageView = (props) => {
                         />
                     }
                     onTouchEnd={() => {
-                        props.addToFavourites(props.id);
-                        console.log(props);
+                        props.favourites.includes(props.id) ? props.addToFavourites(props.id) : props.deleteFromFavourites(props.id)
                     }}
                 >
                     <Icon/>
