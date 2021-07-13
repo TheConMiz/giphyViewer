@@ -1,9 +1,2 @@
-Extra stuff
-
-- NativeBase for UI
-
-
-Going Live
-
-    Once your app is QA complete and close to going live, it’s time to upgrade your API key(s) to Production Level.
-    In the Developer Dashboard, click the “Upgrade to Production” button for eachAPI key used in your app and complete the instructions that follow.
+# GIPHY Viewer
+GIPHY Viewer is an Android application that displays various GIFs based on the user’s search requests. This is accomplished by consuming the Search API provided by GIPHY. For its implementation, React Native was chosen for two reasons. Firstly, its hybrid nature could be useful in the future should the application be ported to iOS. Secondly, React Native is part of a rapidly-growing ecosystem of programming resources, and it was thus chosen over the other options.
