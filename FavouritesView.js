@@ -35,28 +35,28 @@ export const FavouritesView = (props) => {
                     >
                         <Icon />
                     </IconButton>
-    
-                    <IconButton
-                        variant="outlined"
-                        style={styles.button}
-                        icon={
-                            <Icon
-                                size="sm"
-                                as={
-                                    props.favourites.includes(props.id) ? deleteIcon : favouriteIcon
-                                }
-                            />
-                        }
-                        onTouchEnd={() => {
 
-                            props.favourites.includes(props.id) ? props.addToFavourites(props.id) : props.deleteFromFavourites(props.id)
-                        }}
-                    >
-                        <Icon />
-                    </IconButton>
+                    {
+                        props.favourites.includes(props.id) ?
+
+                        <IconButton
+                            variant="outlined"
+                            style={styles.button}
+                            icon={
+                                <Icon
+                                    size="sm"
+                                    as={
+                                        deleteIcon
+                                    }
+                                />
+                            }
+                            onTouchEnd={() => {
+                                props.deleteFromFavourites(props.id)
+                            }}
+                        >
+                        </IconButton>  : <View/>
+                    }
                 </View>
-    
-    
             </View>
         );
 

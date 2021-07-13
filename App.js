@@ -47,21 +47,9 @@ export const App = () => {
 
     function addToFavourites(id) {
         let newFavourites = favourites.slice();
-
-        if (newFavourites.includes(id)) {
-            console.log("Already favourited. Gonna Delete now");
-
-            // TODO: Delete favourites.
-            // let targetIndex = newFavourites.findIndex(item => item === id);
-
-            // let finalFavourites = newFavourites.splice(targetIndex, 1);
-
-            // setFavourites(finalFavourites);
-
-
-        }
         
-        else {
+        if (!newFavourites.includes(id)) {
+
             newFavourites.push(id);
 
             setFavourites(newFavourites);
@@ -69,7 +57,19 @@ export const App = () => {
     }
 
     function deleteFromFavourites(id) {
-        
+
+        let newFavourites = favourites.slice();
+
+        if (newFavourites.includes(id)) {
+            console.log("Already favourited. Gonna Delete now");
+
+            let targetIndex = newFavourites.findIndex(item => item === id);
+
+            let finalFavourites = newFavourites.splice(targetIndex, 1);
+
+            setFavourites(finalFavourites);
+        }
+
     }
 
     return (
@@ -124,7 +124,7 @@ export const App = () => {
                                     resizeMode='contain'
                                     source={{ uri: item.images.original.url }}
                                     id={item.id}
-                                    addToFavourites={addToFavourites}
+                                    deleteFromFavourites={deleteFromFavourites}
                                     favourites={favourites}
                                     onMainPage={onMainPage}
                                 />

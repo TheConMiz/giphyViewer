@@ -9,11 +9,6 @@ import { favouriteIcon, shareIcon, deleteIcon } from './Constants';
 
 export const ImageView = (props) => {
 
-
-    // if the id is in the favourites List, show it
-
-
-
     return (
         
         <View
@@ -39,23 +34,28 @@ export const ImageView = (props) => {
                     <Icon/>
                 </IconButton>
 
-                <IconButton
-                    variant="outlined"
-                    style={styles.button}
-                    icon={
-                        <Icon
-                            size="sm"
-                            as={
-                                props.favourites.includes(props.id) ? deleteIcon : favouriteIcon
-                            }
-                        />
-                    }
-                    onTouchEnd={() => {
-                        props.favourites.includes(props.id) ? props.addToFavourites(props.id) : props.deleteFromFavourites(props.id)
-                    }}
-                >
-                    <Icon/>
-                </IconButton>
+                {
+                    !props.favourites.includes(props.id) ?
+                    <IconButton
+                        variant="outlined"
+                        style={styles.button}
+                        icon={
+                            <Icon
+                                size="sm"
+                                as={
+                                    favouriteIcon
+                                }
+                            />
+                        }
+                        onTouchEnd={() => {
+                            props.addToFavourites(props.id)
+                        }}
+                    >
+                    </IconButton>  : <View/>
+                    
+                }
+
+
             </View>
 
 
