@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+
 import { View, Image, StyleSheet, Dimensions } from 'react-native';
 
 import { IconButton, Icon } from "native-base";
@@ -7,6 +8,10 @@ import { favouriteIcon, shareIcon, deleteIcon } from './Constants';
 
 
 export const ImageView = (props) => {
+
+    useEffect(() => {
+
+    }, [props.favourites])
 
     return (
         <View
@@ -45,6 +50,7 @@ export const ImageView = (props) => {
                     }
                     onTouchEnd={() => {
                         props.addToFavourites(props.id);
+                        console.log(props);
                     }}
                 >
                     <Icon/>

@@ -8,9 +8,9 @@ import { favouriteIcon, searchIcon } from './Constants';
 
 export const TopBar = (props) => {
 
-    // useEffect(() => {
-    //     props.set
-    // });
+    useEffect(() => {
+        props.getGifs()
+    }, [props.query]);
 
     
     return (
@@ -26,7 +26,7 @@ export const TopBar = (props) => {
                 onChangeText={(text) => {
                     props.setQuery(text);
                     
-                    props.getGifs();
+                    // props.getGifs();
                 }}
             />
 

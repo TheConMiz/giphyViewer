@@ -30,6 +30,7 @@ export const App = () => {
 
     async function getGifs() {
 
+
         try {
             const getRequest = url + "?api_key=" + apiKey + "&q=" + query + "&limit=" + limit + "&lang=en" + "&offset=" + offset;
             const responseJSON = await fetch(getRequest);
@@ -43,18 +44,36 @@ export const App = () => {
     }
 
 
-    function addToFavourites(id) {
-        let newFavourites = favourites.splice();
+    function addToFavourites(gif) {
+        let newFavourites = favourites.slice();
 
-        if (newFavourites.includes(id)) {
-            console.log("Already favourited");
+        if (newFavourites.includes(gif.id)) {
+            console.log("Already favourited. Gonna Delete now");
+
+            // TODO: Delete favourites.
+            // let targetIndex = newFavourites.findIndex(item => item === id);
+
+            // let finalFavourites = newFavourites.splice(targetIndex, 1);
+
+            // setFavourites(finalFavourites);
+
+
         }
         
         else {
-            newFavourites.push(id);
+            newFavourites.push(gif);
+
             setFavourites(newFavourites);
         }
 
+    }
+
+    function deleteFromFavourites(id) {
+        
+    }
+
+    async function supplementGifs() {
+        
     }
 
     return (
@@ -71,6 +90,8 @@ export const App = () => {
                         toggleOnMainPage={toggleOnMainPage}
                         setQuery={setQuery}
                         getGifs={getGifs}
+                        query={query}
+                        
                     />
 
                 </View>
@@ -78,12 +99,18 @@ export const App = () => {
 
                 <Text style={styles.resultStatus}>
                     {
-                        gifs.length === 0 ? "No results available." : gifs.length + " results for " + query + "."
+                        gifs.length === 0 ? "No results available." : gifs.length + " results for " + query + "." + 
+
+                        favourites.length
                     }
                 </Text>
 
                 <FlatList
-                    data={gifs}
+                    data={onMainPage ? gifs : gifs.filter((item) => {
+                        favourites.includes(item.id);
+                    })}
+                    extraData={onMainPage}
+
                     renderItem={({ item }) => (
                         <ImageView
                             resizeMode='contain'
@@ -91,8 +118,14 @@ export const App = () => {
                             id={item.id}
                             addToFavourites={addToFavourites}
                             favourites={favourites}
+                            onMainPage={onMainPage}
                         />
                     )}
+                    // onEndReached={() => {
+                    //     setOffset(offset + limit);
+                    //     supplementGifs();
+                    // }}
+                    // onEndReachedThreshold={0.01}
                 />
 
             </View>
