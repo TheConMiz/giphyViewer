@@ -61,9 +61,10 @@ export const App = () => {
         let newFavourites = favourites.slice();
 
         if (newFavourites.includes(id)) {
+
             console.log("Already favourited. Gonna Delete now");
 
-            let targetIndex = newFavourites.findIndex(item => item === id);
+            let targetIndex = newFavourites.indexOf(id);
 
             let finalFavourites = newFavourites.splice(targetIndex, 1);
 
@@ -95,9 +96,7 @@ export const App = () => {
 
                 <Text style={styles.resultStatus}>
                     {
-                        gifs.length === 0 ? "No results available." : gifs.length + " results for " + query + "." + 
-
-                        favourites.length
+                        gifs.length === 0 ? "No results available." : gifs.length + " results for " + query + "."
                     }
                 </Text>
 
@@ -113,6 +112,7 @@ export const App = () => {
                                     addToFavourites={addToFavourites}
                                     favourites={favourites}
                                     onMainPage={onMainPage}
+                                    name={item.name}
                                 />
                             )}
                         /> :
@@ -127,6 +127,7 @@ export const App = () => {
                                     deleteFromFavourites={deleteFromFavourites}
                                     favourites={favourites}
                                     onMainPage={onMainPage}
+                                    name={item.title}
                                 />
                             )}
                         />

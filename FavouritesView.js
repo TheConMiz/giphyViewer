@@ -1,13 +1,24 @@
 import React, {useEffect} from 'react';
 
-import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, Dimensions, Share } from 'react-native';
 
 import { IconButton, Icon, List } from "native-base";
 
-import { favouriteIcon, shareIcon, deleteIcon } from './Constants';
+import { shareIcon, deleteIcon } from './Constants';
 
 
 export const FavouritesView = (props) => {
+
+    const shareOptions = {
+        title: props.name,
+        message: "Enjoy this GIF!",
+        url: props.source,
+        subject: "GIPHY GIF"
+    };
+
+    function shareGif() {
+        Share.share(shareOptions);
+    }
 
     if (props.favourites.includes(props.id)) {
         
@@ -32,6 +43,7 @@ export const FavouritesView = (props) => {
                         icon={
                             <Icon size="sm" as={shareIcon} />
                         }
+                        onTouchEnd={shareGif}
                     >
                         <Icon />
                     </IconButton>
@@ -51,7 +63,7 @@ export const FavouritesView = (props) => {
                                 />
                             }
                             onTouchEnd={() => {
-                                props.deleteFromFavourites(props.id)
+                                props.deleteFromFavourites(props.id);
                             }}
                         >
                         </IconButton>  : <View/>

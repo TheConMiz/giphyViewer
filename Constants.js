@@ -4,6 +4,8 @@ import { Icon, IconButton } from 'native-base';
 
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 
+import {Share} from "react-native";
+
 export const favouriteIcon = (
     <MaterialIcons name="favorite-border" size={24} color="black" />
 );

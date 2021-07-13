@@ -1,14 +1,25 @@
 import React, {useEffect} from 'react';
 
-import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, Dimensions, Share } from 'react-native';
 
 import { IconButton, Icon, List } from "native-base";
 
-import { favouriteIcon, shareIcon, deleteIcon } from './Constants';
+import { favouriteIcon, shareIcon } from './Constants';
 
 
 export const ImageView = (props) => {
+    
+    const shareOptions = {
+        title: props.name,
+        message: "Enjoy this GIF!",
+        url: props.source,
+        subject: "GIPHY GIF"
+    };
 
+    function shareGif() {
+        Share.share(shareOptions);
+    }
+    
     return (
         
         <View
@@ -30,6 +41,7 @@ export const ImageView = (props) => {
                     icon={
                         <Icon size="sm" as={shareIcon} />
                     }
+                    onTouchEnd={shareGif}
                 >
                     <Icon/>
                 </IconButton>
@@ -48,7 +60,7 @@ export const ImageView = (props) => {
                             />
                         }
                         onTouchEnd={() => {
-                            props.addToFavourites(props.id)
+                            props.addToFavourites(props.id);
                         }}
                     >
                     </IconButton>  : <View/>
